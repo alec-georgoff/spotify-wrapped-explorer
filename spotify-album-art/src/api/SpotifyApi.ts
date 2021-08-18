@@ -1,4 +1,4 @@
-import { SpotifyClientCredentialsResult } from "../types/SpotifyTypes";
+import { SpotifyAlbum, SpotifyClientCredentialsResult } from "../types/SpotifyTypes";
 
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
@@ -21,7 +21,7 @@ export const getClientCredentials = async () => {
     return await result.json().then(data => data as SpotifyClientCredentialsResult);
 }
 
-export const getAlbum = async (id: number) => {
+export const getAlbumById = async (id: string) => {
     const clientCredentials = await getClientCredentials();
 
     const result = await fetch(`https://api.spotify.com/v1/albums/${id}`,
@@ -31,4 +31,6 @@ export const getAlbum = async (id: number) => {
             'Authorization': 'Bearer ' + clientCredentials.access_token
         }
     });
+
+    return await result.json().then(data => data as SpotifyAlbum);
 }
