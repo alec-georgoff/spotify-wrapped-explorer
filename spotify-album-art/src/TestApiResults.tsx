@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { getAlbumById } from './api/SpotifyApi';
+import { generateAuthorizationLink, getAlbumById } from './api/SpotifyApi';
 import { SpotifyAlbum } from './types/SpotifyTypes';
 
 export const TestApiResults = () => {
@@ -15,6 +15,9 @@ export const TestApiResults = () => {
 
     return (
         <div>
+            <button onClick={() => (window.location.href = generateAuthorizationLink())}>
+                Log In
+            </button>
             <p>{result && result.name}</p>
             <img
                 src={imgSrc && imgSrc.length > 0 ? imgSrc[0].url : ''}

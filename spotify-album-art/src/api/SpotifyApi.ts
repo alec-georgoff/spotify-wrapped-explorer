@@ -21,6 +21,13 @@ export const getClientCredentials = async () => {
     return await result.json().then(data => data as SpotifyClientCredentialsResult);
 }
 
+export const generateAuthorizationLink = () => {
+    return 'https://accounts.spotify.com/authorize?' +
+    'client_id=' + clientId +
+    '&response_type=token' +
+    '&redirect_uri=' + encodeURIComponent('http://localhost:3000');
+}
+
 export const getAlbumById = async (id: string) => {
     const clientCredentials = await getClientCredentials();
 
