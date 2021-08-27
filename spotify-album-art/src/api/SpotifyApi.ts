@@ -7,6 +7,9 @@ const credentialsToEncode = `${clientId}:${clientSecret}`;
 const buff = new Buffer(credentialsToEncode);
 const encodedCredentials = buff.toString('base64');
 
+const scopes = 'user-read-recently-played' +
+    ' user-top-read';
+
 export const getClientCredentials = async () => {
     let result = await fetch('https://accounts.spotify.com/api/token',
     {
@@ -24,6 +27,7 @@ export const getClientCredentials = async () => {
 export const generateAuthorizationLink = () => {
     return 'https://accounts.spotify.com/authorize?' +
     'client_id=' + clientId +
+    '&scope=' + scopes +
     '&response_type=token' +
     '&redirect_uri=' + encodeURIComponent('http://localhost:3000');
 }
