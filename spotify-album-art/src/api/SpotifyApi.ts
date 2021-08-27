@@ -1,4 +1,4 @@
-import { SpotifyAlbum, SpotifyClientCredentialsResult } from "../types/SpotifyTypes";
+import { SpotifyAlbum, SpotifyClientCredentialsResult, SpotifyTrackPagingObject } from "../types/SpotifyTypes";
 
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
@@ -24,13 +24,12 @@ export const getClientCredentials = async () => {
     return await result.json().then(data => data as SpotifyClientCredentialsResult);
 }
 
-export const generateAuthorizationLink = () => {
-    return 'https://accounts.spotify.com/authorize?' +
+export const authorizationLink = 
+    'https://accounts.spotify.com/authorize?' +
     'client_id=' + clientId +
     '&scope=' + scopes +
     '&response_type=token' +
     '&redirect_uri=' + encodeURIComponent('http://localhost:3000');
-}
 
 export const getAlbumById = async (id: string) => {
     const clientCredentials = await getClientCredentials();
@@ -55,5 +54,5 @@ export const getUsersTopTracks = async (authorization: string) => {
         }
     });
 
-    return await result.json();
+    return await result.json().then(data => data as SpotifyTrackPagingObject);
 }

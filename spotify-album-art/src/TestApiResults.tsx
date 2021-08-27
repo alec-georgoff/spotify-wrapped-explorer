@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { generateAuthorizationLink, getAlbumById } from './api/SpotifyApi';
-import { SpotifyAlbum, SpotifyClientCredentialsResult } from './types/SpotifyTypes';
+import { authorizationLink, getUsersTopTracks } from './api/SpotifyApi';
+import { SpotifyTrack } from './types/SpotifyTypes';
 import queryString from 'query-string';
 
 export const TestApiResults = () => {
-    const [result, setResult] = useState<SpotifyAlbum>();
     const [accessToken, setAccessToken] = useState<string>();
-
-    React.useEffect(() => {
-        getAlbumById('7jJdFic5YXGnrFUjultwMf').then(data => setResult(data));
-    }, []);
+    const [topTracks, setTopTracks] = useState<SpotifyTrack[]>();
 
     React.useEffect(() => {
         const queryResult = queryString.parse(window.location.hash);
@@ -18,20 +14,23 @@ export const TestApiResults = () => {
         typeof parsedToken === 'string' && setAccessToken(parsedToken);
     }, []);
 
-    const imgSrc =
-        result && result.images.sort((a, b) => (a.width && b.width ? b.width - a.width : 1));
+    React.useEffect(() => {
+        if (accessToken && !topTracks) {
+            getUsersTopTracks(accessToken).then(data => {
+                setTopTracks(data.items);
+            });
+        }
+    });
 
     return (
         <div>
-            <button onClick={() => (window.location.href = generateAuthorizationLink())}>
-                Log In
-            </button>
-            <p>{accessToken}</p>
-            <p>{result && result.name}</p>
-            <img
-                src={imgSrc && imgSrc.length > 0 ? imgSrc[0].url : ''}
-                alt={result ? result.name : ''}
-            />
+            <button onClick={() => window.location.assign(authorizationLink)}>Log In</button>
+            {topTracks &&
+                topTracks.map(track => (
+                    <p
+                        key={track.id}
+                    >{`${track.name}, ${track.artists[0].name}, ${track.popularity}`}</p>
+                ))}
         </div>
     );
 };
