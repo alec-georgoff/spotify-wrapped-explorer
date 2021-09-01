@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
 export interface DropdownOption {
     value: string;
@@ -13,11 +13,16 @@ interface Props {
 }
 
 export const MainDropdown = (props: Props) => (
-    <DropdownButton id="dropdown-item-button" title={props.label}>
-        {props.options.map((option, index) => (
-            <Dropdown.Item key={index} onClick={() => props.onSelect(option.value)}>
-                {option.display}
-            </Dropdown.Item>
-        ))}
-    </DropdownButton>
+    <Dropdown>
+        <Dropdown.Toggle id="dropdown-item-button" className="main-dropdown">
+            {props.label}
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+            {props.options.map((option, index) => (
+                <Dropdown.Item key={index} onClick={() => props.onSelect(option.value)}>
+                    {option.display}
+                </Dropdown.Item>
+            ))}
+        </Dropdown.Menu>
+    </Dropdown>
 );
