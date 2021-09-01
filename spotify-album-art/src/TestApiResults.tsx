@@ -5,6 +5,7 @@ import { SpotifyTrack } from './types/SpotifyTypes';
 import queryString from 'query-string';
 import { SongDisplayCard } from './common/SongDisplayCard';
 import { UserTopSong } from './types/UserListeningHabits';
+import { GetTrackAlbumArt } from './api/SpotifyHelpers';
 
 export const TestApiResults = () => {
     const [accessToken, setAccessToken] = useState<string>();
@@ -33,7 +34,8 @@ export const TestApiResults = () => {
                         return {
                             title: track.name,
                             artists: track.artists.map(artist => artist.name),
-                            popularity: track.popularity
+                            popularity: track.popularity,
+                            coverArt: GetTrackAlbumArt(track, 'large')
                         } as UserTopSong;
                     })
                     .map(topSong => <SongDisplayCard song={topSong} />)}

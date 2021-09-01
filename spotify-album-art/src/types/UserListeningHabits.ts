@@ -1,5 +1,6 @@
 export interface UserTopSong {
     title: string,
     artists: string[],
-    popularity: number
+    popularity: number,
+    coverArt: string
 }
