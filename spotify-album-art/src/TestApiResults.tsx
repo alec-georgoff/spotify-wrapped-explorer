@@ -7,6 +7,7 @@ import { SongDisplayCard } from './common/SongDisplayCard';
 import { ListeningHabitsTimeframeOptions, UserTopSong } from './types/UserListeningHabits';
 import { GetTrackAlbumArt } from './api/SpotifyHelpers';
 import { DropdownOption, MainDropdown } from './common/MainDropdown';
+import { Button } from 'react-bootstrap';
 
 export const TestApiResults = () => {
     const [accessToken, setAccessToken] = useState<string>();
@@ -39,7 +40,12 @@ export const TestApiResults = () => {
 
     return (
         <div>
-            <button onClick={() => window.location.assign(authorizationLink)}>Log In</button>
+            <Button
+                className="btn-log-in"
+                onClick={() => window.location.assign(authorizationLink)}
+            >
+                Log In
+            </Button>
             <MainDropdown
                 options={ListeningHabitsTimeframeOptions}
                 label={selectedTimeframe.display}
