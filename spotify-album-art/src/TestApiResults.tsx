@@ -10,7 +10,7 @@ import {
     UserTopSong
 } from './types/UserListeningHabits';
 import { GetTrackAlbumArt } from './api/SpotifyHelpers';
-import { Dropdown } from './common/Dropdown';
+import { MainDropdown } from './common/MainDropdown';
 
 export const TestApiResults = () => {
     const [accessToken, setAccessToken] = useState<string>();
@@ -34,7 +34,7 @@ export const TestApiResults = () => {
     return (
         <div>
             <button onClick={() => window.location.assign(authorizationLink)}>Log In</button>
-            <Dropdown
+            <MainDropdown
                 options={ListeningHabitsTimeframeOptions}
                 label="Timeframe"
                 onSelect={(value: number) => setSelectedTimeframe(value)}
