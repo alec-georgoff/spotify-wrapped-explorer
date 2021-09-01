@@ -28,17 +28,23 @@ export const TestApiResults = () => {
     return (
         <div>
             <button onClick={() => window.location.assign(authorizationLink)}>Log In</button>
-            {topTracks &&
-                topTracks
-                    .map(track => {
-                        return {
-                            title: track.name,
-                            artists: track.artists.map(artist => artist.name),
-                            popularity: track.popularity,
-                            coverArt: GetTrackAlbumArt(track, 'large')
-                        } as UserTopSong;
-                    })
-                    .map(topSong => <SongDisplayCard key={topSong.title} song={topSong} />)}
+            <div className="row">
+                {topTracks &&
+                    topTracks
+                        .map(track => {
+                            return {
+                                title: track.name,
+                                artists: track.artists.map(artist => artist.name),
+                                popularity: track.popularity,
+                                coverArt: GetTrackAlbumArt(track, 'large')
+                            } as UserTopSong;
+                        })
+                        .map(topSong => (
+                            <div className="col-6 col-lg-2 song-display-column">
+                                <SongDisplayCard key={topSong.title} song={topSong} />
+                            </div>
+                        ))}
+            </div>
         </div>
     );
 };

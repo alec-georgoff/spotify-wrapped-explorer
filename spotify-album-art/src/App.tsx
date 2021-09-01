@@ -1,6 +1,6 @@
 import './App.css';
 import { TestApiResults } from './TestApiResults';
-// import '../src/styles/SongDisplay.scss';
+import '../src/styles/SongDisplay.scss';
 
 function App() {
     return (

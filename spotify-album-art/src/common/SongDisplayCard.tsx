@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { UserTopSong } from '../types/UserListeningHabits';
-import '../styles/SongDisplay.scss';
 
 interface Props {
     song: UserTopSong;
@@ -12,7 +11,7 @@ export const SongDisplayCard = (props: Props) => (
             className="card-img-top"
             src={props.song.coverArt}
             alt={props.song.title}
-            style={{ maxWidth: '5rem' }}
+            // style={{ maxWidth: '5rem' }}
         />
         <div className="card-body">
             <div className="song-title">{props.song.title}</div>
