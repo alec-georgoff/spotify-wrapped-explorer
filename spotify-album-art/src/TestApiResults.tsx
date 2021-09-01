@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { authorizationLink, getUsersTopTracks } from './api/SpotifyApi';
 import { SpotifyTrack } from './types/SpotifyTypes';
 import queryString from 'query-string';
+import { SongDisplayCard } from './common/SongDisplayCard';
+import { UserTopSong } from './types/UserListeningHabits';
 
 export const TestApiResults = () => {
     const [accessToken, setAccessToken] = useState<string>();
@@ -26,11 +28,15 @@ export const TestApiResults = () => {
         <div>
             <button onClick={() => window.location.assign(authorizationLink)}>Log In</button>
             {topTracks &&
-                topTracks.map(track => (
-                    <p
-                        key={track.id}
-                    >{`${track.name}, ${track.artists[0].name}, ${track.popularity}`}</p>
-                ))}
+                topTracks
+                    .map(track => {
+                        return {
+                            title: track.name,
+                            artists: track.artists.map(artist => artist.name),
+                            popularity: track.popularity
+                        } as UserTopSong;
+                    })
+                    .map(topSong => <SongDisplayCard song={topSong} />)}
         </div>
     );
 };
