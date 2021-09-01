@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { authorizationLink, getUsersTopTracks } from './api/SpotifyApi';
-import { SpotifyTrack } from './types/SpotifyTypes';
+import { authorizationLink, getUsersProfile, getUsersTopTracks } from './api/SpotifyApi';
+import { SpotifyPrivateUser, SpotifyTrack } from './types/SpotifyTypes';
 import queryString from 'query-string';
 import { SongDisplayCard } from './common/SongDisplayCard';
 import { ListeningHabitsTimeframeOptions, UserTopSong } from './types/UserListeningHabits';
@@ -12,6 +12,7 @@ import { Button } from 'react-bootstrap';
 export const TestApiResults = () => {
     const [accessToken, setAccessToken] = useState<string>();
     const [topTracks, setTopTracks] = useState<SpotifyTrack[]>();
+    const [userProfile, setUserProfile] = useState<SpotifyPrivateUser>();
     const [selectedTimeframe, setSelectedTimeframe] = useState<DropdownOption>(
         ListeningHabitsTimeframeOptions[0]
     );
@@ -24,6 +25,9 @@ export const TestApiResults = () => {
 
     React.useEffect(() => {
         if (accessToken) {
+            getUsersProfile(accessToken).then(data => {
+                setUserProfile(data);
+            });
             getUsersTopTracks(accessToken, selectedTimeframe.value).then(data => {
                 setTopTracks(data.items);
             });
@@ -51,6 +55,7 @@ export const TestApiResults = () => {
                 label={selectedTimeframe.display}
                 onSelect={handleSelectTimeframe}
             />
+            <h4>{userProfile ? `Welcome, ${userProfile.display_name}!` : 'Please log in'}</h4>
             <div className="row">
                 {topTracks &&
                     topTracks

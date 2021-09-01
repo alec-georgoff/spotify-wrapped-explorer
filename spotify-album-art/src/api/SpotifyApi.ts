@@ -1,4 +1,4 @@
-import { SpotifyAlbum, SpotifyClientCredentialsResult, SpotifyTrackPagingObject } from "../types/SpotifyTypes";
+import { SpotifyAlbum, SpotifyClientCredentialsResult, SpotifyPrivateUser, SpotifyTrackPagingObject } from "../types/SpotifyTypes";
 
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
@@ -55,4 +55,16 @@ export const getUsersTopTracks = async (authorization: string, timeframe: string
     });
 
     return await result.json().then(data => data as SpotifyTrackPagingObject);
+}
+
+export const getUsersProfile = async (authorization: string) => {
+    const result = await fetch('https://api.spotify.com/v1/me',
+    {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + authorization
+        }
+    });
+
+    return await result.json().then(data => data as SpotifyPrivateUser);
 }

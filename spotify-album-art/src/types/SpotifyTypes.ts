@@ -150,3 +150,15 @@ export interface SpotifyTrack {
     type: string, // 'track'
     uri: string // the Spotify URI for the track
 }
+
+export interface SpotifyPrivateUser {
+    country: string, // the country of the user, an ISO 3166-1 alpha-2 country code
+    display_name?: string, // null if not available
+    external_urls: SpotifyExternalUrl,
+    followers: SpotifyFollowers,
+    href: string, // link to the Web API endpoint for this user
+    id: string, // Spotify user ID
+    images: SpotifyImage[],
+    type: string, // 'user'
+    uri: string // Spotify URI for the user
+}
