@@ -38,7 +38,7 @@ export const TestApiResults = () => {
                             coverArt: GetTrackAlbumArt(track, 'large')
                         } as UserTopSong;
                     })
-                    .map(topSong => <SongDisplayCard song={topSong} />)}
+                    .map(topSong => <SongDisplayCard key={topSong.title} song={topSong} />)}
         </div>
     );
 };
