@@ -1,7 +1,8 @@
 import './App.css';
 import { TestApiResults } from './TestApiResults';
-import '../src/styles/SongDisplay.scss';
 import '../src/styles/General.scss';
+import '../node_modules/bootstrap/scss/bootstrap.scss';
+import '../src/styles/SongDisplay.scss';
 
 function App() {
     return (

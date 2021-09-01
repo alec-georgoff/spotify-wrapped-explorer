@@ -15,6 +15,13 @@ export const SongDisplayCard = (props: Props) => (
                     return `${artist}${index !== props.song.artists.length - 1 ? ', ' : ''}`;
                 })}
             </div>
+            <div className="progress progress-bar-container">
+                <div
+                    className="progress-bar"
+                    role="progressbar"
+                    style={{ width: `${props.song.popularity}%` }}
+                ></div>
+            </div>
         </div>
     </div>
 );
