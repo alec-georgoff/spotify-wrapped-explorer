@@ -45,8 +45,8 @@ export const getAlbumById = async (id: string) => {
     return await result.json().then(data => data as SpotifyAlbum);
 }
 
-export const getUsersTopTracks = async (authorization: string) => {
-    const result = await fetch('https://api.spotify.com/v1/me/top/tracks',
+export const getUsersTopTracks = async (authorization: string, timeframe: string) => {
+    const result = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeframe}`,
     {
         method: 'GET',
         headers: {

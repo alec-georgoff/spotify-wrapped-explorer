@@ -8,22 +8,22 @@ export interface UserTopSong {
 }
 
 export enum Timeframe {
-    shortTerm,
-    mediumTerm,
-    longTerm
+    shortTerm = 'Short Term',
+    mediumTerm = 'Medium Term',
+    longTerm = 'Long Term'
 }
 
 export const ListeningHabitsTimeframeOptions: DropdownOption[] = [
     {
         display: 'Short Term',
-        value: Timeframe.shortTerm
+        value: 'short_term'
     },
     {
         display: 'Medium Term',
-        value: Timeframe.mediumTerm
+        value: 'medium_term'
     },
     {
         display: 'Long Term',
-        value: Timeframe.longTerm
+        value: 'long_term'
     }
 ]

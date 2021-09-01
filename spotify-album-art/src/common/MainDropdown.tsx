@@ -2,14 +2,14 @@ import * as React from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 export interface DropdownOption {
-    value: number;
+    value: string;
     display: string;
 }
 
 interface Props {
     options: DropdownOption[];
     label: string;
-    onSelect: (value: number) => void;
+    onSelect: (value: string) => void;
 }
 
 export const MainDropdown = (props: Props) => (

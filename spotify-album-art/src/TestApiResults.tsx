@@ -4,18 +4,16 @@ import { authorizationLink, getUsersTopTracks } from './api/SpotifyApi';
 import { SpotifyTrack } from './types/SpotifyTypes';
 import queryString from 'query-string';
 import { SongDisplayCard } from './common/SongDisplayCard';
-import {
-    ListeningHabitsTimeframeOptions,
-    Timeframe,
-    UserTopSong
-} from './types/UserListeningHabits';
+import { ListeningHabitsTimeframeOptions, UserTopSong } from './types/UserListeningHabits';
 import { GetTrackAlbumArt } from './api/SpotifyHelpers';
-import { MainDropdown } from './common/MainDropdown';
+import { DropdownOption, MainDropdown } from './common/MainDropdown';
 
 export const TestApiResults = () => {
     const [accessToken, setAccessToken] = useState<string>();
     const [topTracks, setTopTracks] = useState<SpotifyTrack[]>();
-    const [selectedTimeframe, setSelectedTimeframe] = useState<Timeframe>(Timeframe.mediumTerm);
+    const [selectedTimeframe, setSelectedTimeframe] = useState<DropdownOption>(
+        ListeningHabitsTimeframeOptions[0]
+    );
 
     React.useEffect(() => {
         const queryResult = queryString.parse(window.location.hash);
@@ -24,22 +22,29 @@ export const TestApiResults = () => {
     }, []);
 
     React.useEffect(() => {
-        if (accessToken && !topTracks) {
-            getUsersTopTracks(accessToken).then(data => {
+        if (accessToken) {
+            getUsersTopTracks(accessToken, selectedTimeframe.value).then(data => {
                 setTopTracks(data.items);
             });
         }
-    });
+    }, [selectedTimeframe, accessToken]);
+
+    const handleSelectTimeframe = (selectedValue: string) => {
+        const matchingOption = ListeningHabitsTimeframeOptions.find(
+            option => option.value === selectedValue
+        );
+
+        setSelectedTimeframe(matchingOption || ListeningHabitsTimeframeOptions[0]);
+    };
 
     return (
         <div>
             <button onClick={() => window.location.assign(authorizationLink)}>Log In</button>
             <MainDropdown
                 options={ListeningHabitsTimeframeOptions}
-                label="Timeframe"
-                onSelect={(value: number) => setSelectedTimeframe(value)}
+                label={selectedTimeframe.display}
+                onSelect={handleSelectTimeframe}
             />
-            <div>{selectedTimeframe}</div>
             <div className="row">
                 {topTracks &&
                     topTracks
