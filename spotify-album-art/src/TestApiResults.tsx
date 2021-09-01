@@ -4,12 +4,18 @@ import { authorizationLink, getUsersTopTracks } from './api/SpotifyApi';
 import { SpotifyTrack } from './types/SpotifyTypes';
 import queryString from 'query-string';
 import { SongDisplayCard } from './common/SongDisplayCard';
-import { UserTopSong } from './types/UserListeningHabits';
+import {
+    ListeningHabitsTimeframeOptions,
+    Timeframe,
+    UserTopSong
+} from './types/UserListeningHabits';
 import { GetTrackAlbumArt } from './api/SpotifyHelpers';
+import { Dropdown } from './common/Dropdown';
 
 export const TestApiResults = () => {
     const [accessToken, setAccessToken] = useState<string>();
     const [topTracks, setTopTracks] = useState<SpotifyTrack[]>();
+    const [selectedTimeframe, setSelectedTimeframe] = useState<Timeframe>(Timeframe.mediumTerm);
 
     React.useEffect(() => {
         const queryResult = queryString.parse(window.location.hash);
@@ -28,6 +34,12 @@ export const TestApiResults = () => {
     return (
         <div>
             <button onClick={() => window.location.assign(authorizationLink)}>Log In</button>
+            <Dropdown
+                options={ListeningHabitsTimeframeOptions}
+                label="Timeframe"
+                onSelect={(value: number) => setSelectedTimeframe(value)}
+            />
+            <div>{selectedTimeframe}</div>
             <div className="row">
                 {topTracks &&
                     topTracks
