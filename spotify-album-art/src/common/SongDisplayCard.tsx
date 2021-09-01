@@ -7,12 +7,7 @@ interface Props {
 
 export const SongDisplayCard = (props: Props) => (
     <div className="card">
-        <img
-            className="card-img-top"
-            src={props.song.coverArt}
-            alt={props.song.title}
-            // style={{ maxWidth: '5rem' }}
-        />
+        <img className="card-img-top" src={props.song.coverArt} alt={props.song.title} />
         <div className="card-body">
             <div className="song-title">{props.song.title}</div>
             <div className="song-artists">
