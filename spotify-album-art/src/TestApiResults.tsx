@@ -5,7 +5,7 @@ import { SpotifyPrivateUser, SpotifyTrack } from './types/SpotifyTypes';
 import queryString from 'query-string';
 import { SongDisplayCard } from './common/SongDisplayCard';
 import { ListeningHabitsTimeframeOptions, UserTopSong } from './types/UserListeningHabits';
-import { GetTrackAlbumArt } from './api/SpotifyHelpers';
+import { GetImage } from './api/SpotifyHelpers';
 import { DropdownOption, MainDropdown } from './common/MainDropdown';
 import { Button } from 'react-bootstrap';
 
@@ -64,7 +64,7 @@ export const TestApiResults = () => {
                                 title: track.name,
                                 artists: track.artists.map(artist => artist.name),
                                 popularity: track.popularity,
-                                coverArt: GetTrackAlbumArt(track, 'large')
+                                coverArt: GetImage(track.album.images, 'large')
                             } as UserTopSong;
                         })
                         .map(topSong => (
