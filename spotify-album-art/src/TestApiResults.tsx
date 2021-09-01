@@ -56,6 +56,9 @@ export const TestApiResults = () => {
                 onSelect={handleSelectTimeframe}
             />
             <h4>{userProfile ? `Welcome, ${userProfile.display_name}!` : 'Please log in'}</h4>
+            {userProfile && (
+                <img src={GetImage(userProfile.images, 'large')} alt={userProfile.display_name} />
+            )}
             <div className="row">
                 {topTracks &&
                     topTracks
