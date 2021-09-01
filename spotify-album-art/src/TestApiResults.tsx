@@ -57,7 +57,13 @@ export const TestApiResults = () => {
             />
             <h4>{userProfile ? `Welcome, ${userProfile.display_name}!` : 'Please log in'}</h4>
             {userProfile && (
-                <img src={GetImage(userProfile.images, 'large')} alt={userProfile.display_name} />
+                <>
+                    <img
+                        src={GetImage(userProfile.images, 'large')}
+                        alt={userProfile.display_name}
+                    />
+                    <h4>You have {userProfile.followers.total} followers</h4>
+                </>
             )}
             <div className="row">
                 {topTracks &&
