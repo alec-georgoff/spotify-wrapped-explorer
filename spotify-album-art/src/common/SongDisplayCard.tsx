@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const SongDisplayCard = (props: Props) => (
-    <div className="card">
+    <div className="card song-display-card">
         <img
             className="card-img-top"
             src={GetImage(props.song.album.images, 'large')}
