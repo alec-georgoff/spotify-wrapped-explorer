@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Modal } from 'react-bootstrap';
 import { GetImage } from '../api/SpotifyHelpers';
 import { SpotifyTrack } from '../types/SpotifyTypes';
+import { SongDetailsModal } from './SongDetailsModal';
 
 interface Props {
     song: SpotifyTrack;
@@ -13,9 +13,11 @@ export const SongDisplayCard = (props: Props) => {
 
     return (
         <>
-            <Modal show={modalOpen} onHide={() => setModalOpen(false)}>
-                <Modal.Header>Put artist photo here</Modal.Header>
-            </Modal>
+            <SongDetailsModal
+                song={props.song}
+                open={modalOpen}
+                onClose={() => setModalOpen(false)}
+            />
             <div className="card song-display-card" onClick={() => setModalOpen(true)}>
                 <img
                     className="card-img-top"
