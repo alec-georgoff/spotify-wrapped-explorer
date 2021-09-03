@@ -1,13 +1,5 @@
 import { DropdownOption } from "../common/MainDropdown";
 
-export interface UserTopSong {
-    title: string,
-    artists: string[],
-    popularity: number,
-    coverArt: string,
-    preview?: string
-}
-
 export enum Timeframe {
     shortTerm = 'Short Term',
     mediumTerm = 'Medium Term',

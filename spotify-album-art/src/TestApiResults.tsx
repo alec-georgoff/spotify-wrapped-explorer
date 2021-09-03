@@ -4,8 +4,7 @@ import { authorizationLink, getUsersProfile, getUsersTopTracks } from './api/Spo
 import { SpotifyPrivateUser, SpotifyTrack } from './types/SpotifyTypes';
 import queryString from 'query-string';
 import { SongDisplayCard } from './common/SongDisplayCard';
-import { ListeningHabitsTimeframeOptions, UserTopSong } from './types/UserListeningHabits';
-import { GetImage } from './api/SpotifyHelpers';
+import { ListeningHabitsTimeframeOptions } from './types/UserListeningHabits';
 import { DropdownOption, MainDropdown } from './common/MainDropdown';
 import { Button } from 'react-bootstrap';
 import { UserProfileDisplay } from './common/UserProfileDisplay';
@@ -63,21 +62,11 @@ export const TestApiResults = () => {
             </div>
             <div className="row">
                 {topTracks &&
-                    topTracks
-                        .map(track => {
-                            return {
-                                title: track.name,
-                                artists: track.artists.map(artist => artist.name),
-                                popularity: track.popularity,
-                                coverArt: GetImage(track.album.images, 'large'),
-                                preview: track.preview_url
-                            } as UserTopSong;
-                        })
-                        .map(topSong => (
-                            <div className="col-6 col-lg-2 song-display-column">
-                                <SongDisplayCard key={topSong.title} song={topSong} />
-                            </div>
-                        ))}
+                    topTracks.map(topSong => (
+                        <div className="col-6 col-lg-2 song-display-column">
+                            <SongDisplayCard key={topSong.id} song={topSong} />
+                        </div>
+                    ))}
             </div>
         </div>
     );

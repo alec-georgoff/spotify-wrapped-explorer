@@ -1,18 +1,23 @@
 import * as React from 'react';
-import { UserTopSong } from '../types/UserListeningHabits';
+import { GetImage } from '../api/SpotifyHelpers';
+import { SpotifyTrack } from '../types/SpotifyTypes';
 
 interface Props {
-    song: UserTopSong;
+    song: SpotifyTrack;
 }
 
 export const SongDisplayCard = (props: Props) => (
     <div className="card">
-        <img className="card-img-top" src={props.song.coverArt} alt={props.song.title} />
+        <img
+            className="card-img-top"
+            src={GetImage(props.song.album.images, 'large')}
+            alt={props.song.name}
+        />
         <div className="card-body">
-            <div className="song-title">{props.song.title}</div>
+            <div className="song-title">{props.song.name}</div>
             <div className="song-artists">
                 {props.song.artists.map((artist, index) => {
-                    return `${artist}${index !== props.song.artists.length - 1 ? ', ' : ''}`;
+                    return `${artist.name}${index !== props.song.artists.length - 1 ? ', ' : ''}`;
                 })}
             </div>
             <div className="progress progress-bar-container">

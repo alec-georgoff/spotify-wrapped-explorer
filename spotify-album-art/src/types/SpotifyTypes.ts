@@ -131,7 +131,7 @@ export interface SpotifyTrackPagingObject extends SpotifyPagingObject {
 
 export interface SpotifyTrack {
     album: SpotifySimplifiedAlbum, // the album on which the track appears
-    artists: SpotifyArtist[], // the artists who performed the track
+    artists: SpotifySimplifiedArtist[], // the artists who performed the track
     available_markets: string[], // a list of the countries in which the track can be played
     disc_number: number,
     duration_ms: number,
