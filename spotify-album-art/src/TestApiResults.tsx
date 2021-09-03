@@ -8,6 +8,7 @@ import { ListeningHabitsTimeframeOptions, UserTopSong } from './types/UserListen
 import { GetImage } from './api/SpotifyHelpers';
 import { DropdownOption, MainDropdown } from './common/MainDropdown';
 import { Button } from 'react-bootstrap';
+import { UserProfileDisplay } from './common/UserProfileDisplay';
 
 export const TestApiResults = () => {
     const [accessToken, setAccessToken] = useState<string>();
@@ -55,16 +56,7 @@ export const TestApiResults = () => {
                 label={selectedTimeframe.display}
                 onSelect={handleSelectTimeframe}
             />
-            <h4>{userProfile ? `Welcome, ${userProfile.display_name}!` : 'Please log in'}</h4>
-            {userProfile && (
-                <>
-                    <img
-                        src={GetImage(userProfile.images, 'large')}
-                        alt={userProfile.display_name}
-                        className="profile-image"
-                    />
-                </>
-            )}
+            <UserProfileDisplay userProfile={userProfile} />
             <div className="row">
                 {topTracks &&
                     topTracks
