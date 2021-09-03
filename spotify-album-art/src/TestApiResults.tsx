@@ -61,6 +61,7 @@ export const TestApiResults = () => {
                     <img
                         src={GetImage(userProfile.images, 'large')}
                         alt={userProfile.display_name}
+                        className="profile-image"
                     />
                     <h4>You have {userProfile.followers.total} followers</h4>
                 </>
