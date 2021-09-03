@@ -46,7 +46,7 @@ export const getAlbumById = async (id: string) => {
 }
 
 export const getUsersTopTracks = async (authorization: string, timeframe: string) => {
-    const result = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeframe}`,
+    const result = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeframe}&limit=50`,
     {
         method: 'GET',
         headers: {
