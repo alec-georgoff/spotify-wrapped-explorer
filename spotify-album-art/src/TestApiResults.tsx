@@ -73,7 +73,8 @@ export const TestApiResults = () => {
                                 title: track.name,
                                 artists: track.artists.map(artist => artist.name),
                                 popularity: track.popularity,
-                                coverArt: GetImage(track.album.images, 'large')
+                                coverArt: GetImage(track.album.images, 'large'),
+                                preview: track.preview_url
                             } as UserTopSong;
                         })
                         .map(topSong => (

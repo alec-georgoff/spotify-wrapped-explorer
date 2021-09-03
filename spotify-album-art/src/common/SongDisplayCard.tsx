@@ -22,6 +22,7 @@ export const SongDisplayCard = (props: Props) => (
                     style={{ width: `${props.song.popularity}%` }}
                 ></div>
             </div>
+            {/* <audio controls src={props.song.preview} /> */}
         </div>
     </div>
 );

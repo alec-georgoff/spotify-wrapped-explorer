@@ -4,7 +4,8 @@ export interface UserTopSong {
     title: string,
     artists: string[],
     popularity: number,
-    coverArt: string
+    coverArt: string,
+    preview?: string
 }
 
 export enum Timeframe {
