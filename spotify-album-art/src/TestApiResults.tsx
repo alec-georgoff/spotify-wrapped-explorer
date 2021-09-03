@@ -63,7 +63,6 @@ export const TestApiResults = () => {
                         alt={userProfile.display_name}
                         className="profile-image"
                     />
-                    <h4>You have {userProfile.followers.total} followers</h4>
                 </>
             )}
             <div className="row">
