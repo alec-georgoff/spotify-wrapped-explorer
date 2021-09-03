@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { GetImage } from '../api/SpotifyHelpers';
+import { GetImage, ListWithCommas } from '../api/SpotifyHelpers';
 import { SpotifyTrack } from '../types/SpotifyTypes';
 import { SongDetailsModal } from './SongDetailsModal';
 
@@ -27,11 +27,7 @@ export const SongDisplayCard = (props: Props) => {
                 <div className="card-body">
                     <div className="song-title">{props.song.name}</div>
                     <div className="song-artists">
-                        {props.song.artists.map((artist, index) => {
-                            return `${artist.name}${
-                                index !== props.song.artists.length - 1 ? ', ' : ''
-                            }`;
-                        })}
+                        {ListWithCommas(props.song.artists.map(artist => artist.name))}
                     </div>
                     <div className="progress progress-bar-container">
                         <div

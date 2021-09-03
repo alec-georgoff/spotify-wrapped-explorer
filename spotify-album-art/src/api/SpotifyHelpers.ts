@@ -6,3 +6,5 @@ export const GetImage = (images: SpotifyImage[], size: 'small' | 'large') => {
 
     return sorted.length !== 0 ? sorted[0].url : '';
 }
+
+export const ListWithCommas = (words: string[]) => words.map((word, index) => `${word}${index !== words.length - 1 ? ', ' : ''}`);
