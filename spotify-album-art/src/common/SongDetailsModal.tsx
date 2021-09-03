@@ -24,13 +24,24 @@ export const SongDetailsModal = (props: Props) => {
     return (
         <Modal show={props.open} onHide={props.onClose}>
             {artistDetails ? (
-                <Modal.Header>
-                    <img
-                        src={GetImage(artistDetails.images, 'large')}
-                        alt={artistDetails.name}
-                        className="song-details-artist-image"
-                    />
-                </Modal.Header>
+                <>
+                    <Modal.Header className="modal-header">
+                        <img
+                            src={GetImage(artistDetails.images, 'large')}
+                            alt={artistDetails.name}
+                            className="song-details-artist-image"
+                        />
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div>
+                            <img
+                                src={GetImage(props.song.album.images, 'large')}
+                                alt={props.song.name}
+                                className="song-details-album-image"
+                            />
+                        </div>
+                    </Modal.Body>
+                </>
             ) : (
                 <Modal.Header>Error loading artist info</Modal.Header>
             )}
