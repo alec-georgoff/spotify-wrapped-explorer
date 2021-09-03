@@ -45,18 +45,22 @@ export const TestApiResults = () => {
 
     return (
         <div>
-            <Button
-                className="btn-log-in"
-                onClick={() => window.location.assign(authorizationLink)}
-            >
-                Log In
-            </Button>
-            <MainDropdown
-                options={ListeningHabitsTimeframeOptions}
-                label={selectedTimeframe.display}
-                onSelect={handleSelectTimeframe}
-            />
-            <UserProfileDisplay userProfile={userProfile} />
+            <div className="profile-display-row">
+                <UserProfileDisplay userProfile={userProfile} />
+            </div>
+            <div className="controls-row">
+                <Button
+                    className="btn-log-in"
+                    onClick={() => window.location.assign(authorizationLink)}
+                >
+                    {accessToken ? 'Refresh Authorization' : 'Log In'}
+                </Button>
+                <MainDropdown
+                    options={ListeningHabitsTimeframeOptions}
+                    label={selectedTimeframe.display}
+                    onSelect={handleSelectTimeframe}
+                />
+            </div>
             <div className="row">
                 {topTracks &&
                     topTracks
