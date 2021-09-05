@@ -22,6 +22,12 @@
     padding: 0 !important;
 }
 
+.modal-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
+}
+
 .song-details-artist-image {
     object-fit: cover;
     width: 100%;

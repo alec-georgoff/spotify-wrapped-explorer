@@ -1,15 +1,21 @@
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
+$spotify-green: rgb(30, 215, 96);
+
 .main-dropdown {
-    color: black !important;
-    background-color: rgb(30, 215, 96) !important;
-    border-color: black !important;
+    color: white !important;
+    font-weight: bold !important;
+    background-color: $spotify-green !important;
+    border: none !important;
+    border-radius: 5rem !important;
 }
 
 .btn-log-in {
-    color: black !important;
-    background-color: rgb(30, 215, 96) !important;
-    border-color: black !important;
+    color: white !important;
+    font-weight: bold !important;
+    background-color: $spotify-green !important;
+    border: none !important;
+    border-radius: 5rem !important;
 }
 
 .progress-bar-container {
@@ -17,7 +23,7 @@
 }
 
 .progress-bar {
-    background-color: rgb(30, 215, 96) !important;
+    background-color: $spotify-green !important;
 }
 
 .profile-image {

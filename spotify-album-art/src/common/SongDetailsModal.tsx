@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { getArtistById } from '../api/SpotifyApi';
 import { GetImage, ListWithCommas } from '../api/SpotifyHelpers';
 import { SpotifyArtist, SpotifyTrack } from '../types/SpotifyTypes';
@@ -56,6 +56,17 @@ export const SongDetailsModal = (props: Props) => {
                             </div>
                         )}
                     </Modal.Body>
+                    <Modal.Footer className="modal-footer">
+                        <Button
+                            className="btn-log-in"
+                            onClick={() => window.open(props.song.external_urls.spotify)}
+                        >
+                            Play on Spotify
+                        </Button>
+                        <Button className="btn-log-in" onClick={props.onClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
                 </>
             ) : (
                 <Modal.Header>Error loading artist info</Modal.Header>
