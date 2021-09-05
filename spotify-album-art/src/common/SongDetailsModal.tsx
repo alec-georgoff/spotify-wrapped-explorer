@@ -22,7 +22,7 @@ export const SongDetailsModal = (props: Props) => {
     }, [props.open, props.song.artists]);
 
     return (
-        <Modal show={props.open} onHide={props.onClose}>
+        <Modal show={props.open} onHide={props.onClose} centered>
             {artistDetails ? (
                 <>
                     <Modal.Header className="modal-header">
