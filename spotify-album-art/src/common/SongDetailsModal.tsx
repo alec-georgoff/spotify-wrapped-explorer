@@ -45,6 +45,16 @@ export const SongDetailsModal = (props: Props) => {
                                 </h5>
                             </div>
                         </div>
+                        {props.song.preview_url && (
+                            <div>
+                                <audio
+                                    src={props.song.preview_url}
+                                    controls
+                                    autoPlay={props.open}
+                                    className="audio-player"
+                                />
+                            </div>
+                        )}
                     </Modal.Body>
                 </>
             ) : (
