@@ -6,7 +6,7 @@ import queryString from 'query-string';
 import { SongDisplayCard } from './common/SongDisplayCard';
 import { ListeningHabitsTimeframeOptions } from './types/UserListeningHabits';
 import { DropdownOption, MainDropdown } from './common/MainDropdown';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import { UserProfileDisplay } from './common/UserProfileDisplay';
 
 export const TestApiResults = () => {
@@ -16,6 +16,7 @@ export const TestApiResults = () => {
     const [selectedTimeframe, setSelectedTimeframe] = useState<DropdownOption>(
         ListeningHabitsTimeframeOptions[0]
     );
+    const [loading, setLoading] = useState(false);
 
     React.useEffect(() => {
         const queryResult = queryString.parse(window.location.hash);
@@ -24,6 +25,7 @@ export const TestApiResults = () => {
     }, []);
 
     React.useEffect(() => {
+        setLoading(true);
         if (accessToken) {
             getUsersProfile(accessToken).then(data => {
                 setUserProfile(data);
@@ -32,6 +34,7 @@ export const TestApiResults = () => {
                 setTopTracks(data.items);
             });
         }
+        setLoading(false);
     }, [selectedTimeframe, accessToken]);
 
     const handleSelectTimeframe = (selectedValue: string) => {
@@ -61,12 +64,18 @@ export const TestApiResults = () => {
                 />
             </div>
             <div className="row">
-                {topTracks &&
+                {loading ? (
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Spinner animation="border" />
+                    </div>
+                ) : (
+                    topTracks &&
                     topTracks.map(topSong => (
                         <div className="col-6 col-lg-2 song-display-column">
                             <SongDisplayCard key={topSong.id} song={topSong} />
                         </div>
-                    ))}
+                    ))
+                )}
             </div>
         </div>
     );
