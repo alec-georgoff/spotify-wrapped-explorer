@@ -10,9 +10,10 @@ interface Props {
 
 export const SongDisplayCard = (props: Props) => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [loadingImage, setLoadingImage] = useState(true);
 
     return (
-        <>
+        <div className={loadingImage ? 'hidden' : 'fade-in'}>
             <SongDetailsModal
                 song={props.song}
                 open={modalOpen}
@@ -23,6 +24,7 @@ export const SongDisplayCard = (props: Props) => {
                     className="card-img-top"
                     src={GetImage(props.song.album.images, 'large')}
                     alt={props.song.name}
+                    onLoad={() => setLoadingImage(false)}
                 />
                 <div className="card-body">
                     <div className="song-title">{props.song.name}</div>
@@ -36,9 +38,8 @@ export const SongDisplayCard = (props: Props) => {
                             style={{ width: `${props.song.popularity}%` }}
                         ></div>
                     </div>
-                    {/* <audio controls src={props.song.preview} /> */}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
