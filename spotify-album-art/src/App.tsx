@@ -7,7 +7,7 @@ import '../src/styles/SongDisplay.scss';
 function App() {
     return (
         <div className="container">
-            <header className="App-header">My Spotify App</header>
+            <header className="App-header">Spotify Top Songs Explorer</header>
             <TestApiResults />
         </div>
     );
