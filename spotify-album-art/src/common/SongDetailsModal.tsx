@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Spinner } from 'react-bootstrap';
 import { getArtistById } from '../api/SpotifyApi';
 import { GetImage, ListWithCommas } from '../api/SpotifyHelpers';
 import { SpotifyArtist, SpotifyTrack } from '../types/SpotifyTypes';
@@ -10,8 +10,19 @@ interface Props {
     onClose: () => void;
 }
 
+interface LoadingStatuses {
+    artistDetails: boolean;
+    artistImage: boolean;
+    albumImage: boolean;
+}
+
 export const SongDetailsModal = (props: Props) => {
     const [artistDetails, setArtistDetails] = useState<SpotifyArtist>();
+    const [loading, setLoading] = useState<LoadingStatuses>({
+        artistDetails: true,
+        artistImage: true,
+        albumImage: true
+    });
 
     useEffect(() => {
         if (props.open) {
@@ -19,17 +30,25 @@ export const SongDetailsModal = (props: Props) => {
         } else {
             setArtistDetails(undefined);
         }
+        setLoading(prevState => {
+            return { ...prevState, artistDetails: false };
+        });
     }, [props.open, props.song.artists]);
 
     return (
         <Modal show={props.open} onHide={props.onClose} centered>
-            {artistDetails ? (
-                <>
+            {artistDetails && !loading.artistDetails ? (
+                <div
+                    className={`${
+                        loading.artistImage || loading.albumImage ? 'hidden' : 'fade-in'
+                    }`}
+                >
                     <Modal.Header className="modal-header">
                         <img
                             src={GetImage(artistDetails.images, 'large')}
                             alt={artistDetails.name}
                             className="song-details-artist-image"
+                            onLoad={() => setLoading({ ...loading, artistImage: false })}
                         />
                     </Modal.Header>
                     <Modal.Body>
@@ -37,6 +56,7 @@ export const SongDetailsModal = (props: Props) => {
                             <img
                                 src={GetImage(props.song.album.images, 'large')}
                                 alt={props.song.name}
+                                onLoad={() => setLoading({ ...loading, albumImage: false })}
                             />
                             <div>
                                 <h4>{props.song.name}</h4>
@@ -67,9 +87,11 @@ export const SongDetailsModal = (props: Props) => {
                             Close
                         </Button>
                     </Modal.Footer>
-                </>
+                </div>
             ) : (
-                <Modal.Header>Error loading artist info</Modal.Header>
+                <div className="loading-spinner">
+                    <Spinner animation="border" />
+                </div>
             )}
         </Modal>
     );

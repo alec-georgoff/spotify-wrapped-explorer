@@ -65,7 +65,7 @@ export const TestApiResults = () => {
             </div>
             <div className="row">
                 {loading ? (
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div className="loading-spinner">
                         <Spinner animation="border" />
                     </div>
                 ) : (
