@@ -68,7 +68,7 @@ export const SongDetailsModal = (props: Props) => {
                         {props.song.preview_url && (
                             <div>
                                 <audio
-                                    src={props.song.preview_url}
+                                    src={props.open ? props.song.preview_url : ''}
                                     controls
                                     autoPlay={props.open}
                                     className="audio-player"
