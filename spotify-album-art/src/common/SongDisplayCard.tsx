@@ -31,7 +31,8 @@ export const SongDisplayCard = (props: Props) => {
                     <div className="song-artists">
                         {ListWithCommas(props.song.artists.map(artist => artist.name))}
                     </div>
-                    <div className="progress progress-bar-container">
+                    <span className="popularity-label">Popularity:</span>
+                    <div className="progress">
                         <div
                             className="progress-bar"
                             role="progressbar"
